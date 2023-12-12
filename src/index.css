@@ -1,0 +1,87 @@
+body {
+  background-color: #f8f9fa;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.fieldContainer {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input,
+.textarea,
+.select {
+  padding: 8px;
+  margin-bottom: 5px;
+}
+
+.checkbox,
+.radio {
+  margin-right: 5px;
+}
+
+.removeButton {
+  margin-top: 5px;
+  width: 100px;
+  cursor: pointer;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+.formContainer {
+  max-width: 600px;
+  margin: auto;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.addButton,
+.submitButton,
+.saveConfigButton {
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 3px;
+}
+
+.addButton {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.submitButton {
+  margin-top: 10px;
+  background-color: #28a745;
+  color: #fff;
+}
+
+.saveConfigButton {
+  margin-top: 10px;
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.navbar {
+  background-color: #3997b6; /* Light Blue Color */
+  padding: 15px;
+  text-align: center;
+}
+
+.navbar h1 {
+  margin: 0;
+  color: white;
+}
