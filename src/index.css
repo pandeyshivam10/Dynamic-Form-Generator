@@ -39,27 +39,36 @@ body {
 }
 
 .formContainer {
-  max-width: 600px;
+  width: 50vw;
   margin: auto;
+  padding: 2vw;
 }
 
-.buttonContainer {
+.buttonContainer,
+.buttonclass {
   display: flex;
-  justify-content: space-between;
+
+  justify-content: center;
   margin-top: 10px;
 }
 
 .addButton,
 .submitButton,
-.saveConfigButton {
+.saveConfigButton,
+.LoadButton {
   cursor: pointer;
   border: none;
   padding: 8px 12px;
   border-radius: 3px;
+  margin: 9px;
 }
 
 .addButton {
   background-color: #007bff;
+  color: #fff;
+}
+.LoadButton {
+  background-color: #e0670e;
   color: #fff;
 }
 
@@ -76,7 +85,7 @@ body {
 }
 
 .navbar {
-  background-color: #3997b6; 
+  background-color: #3997b6;
   padding: 15px;
   text-align: center;
 }
@@ -84,4 +93,193 @@ body {
 .navbar h1 {
   margin: 0;
   color: white;
+}
+
+/* Add this CSS to your stylesheet or component */
+.roundCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.roundCheckboxInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.roundCheckboxLabel {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.roundCheckboxLabel:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  position: absolute;
+  left: 0;
+  top: 1px;
+}
+
+.roundCheckboxInput:checked + .roundCheckboxLabel:before {
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+
+/* CSS Styles */
+.fieldContainer {
+  margin-bottom: 20px;
+}
+
+.label {
+  align-self: flex-start;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.addOptionButton,
+.removeOptionButton,
+.removeButton {
+  padding: 8px 16px;
+  margin-top: 5px;
+  margin-right: 10px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.addOptionButton:hover,
+.removeOptionButton:hover,
+.removeButton:hover {
+  background-color: #0e7ce4;
+}
+
+.roundCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.roundCheckboxInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.roundCheckboxLabel {
+  display: inline-block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.roundCheckboxLabel:before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  position: absolute;
+  left: 0;
+  top: 1px;
+}
+
+.roundCheckboxInput:checked + .roundCheckboxLabel:before {
+  background-color: #2196f3;
+  border-color: #2196f3;
+}
+
+/* CSS Styles */
+.SquareCheckboxWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.SquareCheckboxInput {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Checkbox style */
+.SquareCheckboxInput + label {
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.SquareCheckboxInput + label:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease; /* Transition effect */
+}
+
+/* Checkmark */
+.SquareCheckboxInput:checked + label:before {
+  background-color: #2196f3; /* Change the background color */
+  border-color: #2196f3; /* Change the border color */
+}
+
+/* Text input style */
+.SquareCheckboxWrapper input[type="text"] {
+  margin-left: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Focus style for checkbox */
+.SquareCheckboxInput:focus + label:before {
+  box-shadow: 0 0 2px 2px rgba(33, 150, 243, 0.3);
+}
+
+.buttonclass {
+  display: flex;
+  justify: center;
+  align-items: center;
+}
+.buttons {
+  margin: 2rem;
+}
+.card {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }

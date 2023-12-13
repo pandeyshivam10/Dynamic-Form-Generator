@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 const FormField = ({ field, onRemoveField, onChangeField }) => {
@@ -87,39 +88,63 @@ const FormField = ({ field, onRemoveField, onChangeField }) => {
             </button>
           </div>
         );
+        case "radio":
+  return (
+    <div>
+      {options.map((option, index) => (
+        <div key={index} className="roundCheckboxWrapper">
+          <input
+            type="checkbox"
+            id={`checkbox-${index}`}
+            value={option}
+            checked={field.value === option}
+            onChange={() => onChangeField({ value: option })}
+            className="roundCheckboxInput"
+          />
+          <label htmlFor={`checkbox-${index}`} className="roundCheckboxLabel">
+            {option}
+          </label>
+          <input
+            type="text"
+            value={option}
+            onChange={(e) => {
+              const updatedOptions = [...options];
+              updatedOptions[index] = e.target.value;
+              onChangeField({
+                options: updatedOptions,
+                value: field.value,
+              });
+            }}
+          />
+        </div>
+      ))}
+      <button
+        onClick={() => onChangeField({ options: [...options, ""], value: field.value })}
+        className="addOptionButton"
+      >
+        Add Option
+      </button>
+      <button
+        onClick={() => onChangeField({ options: options.slice(0, -1), value: field.value })}
+        className="removeOptionButton"
+      >
+        Remove Option
+      </button>
+    </div>
+  );
+
       case "checkbox":
-        return (
-          <div
-            style={{ width: "100%", display: "flex", justifyContent: "center" }}
-          >
-            <div>
-              <input
-                type="checkbox"
-                checked={field.value === "Yes"}
-                onChange={() => onChangeField({ value: "Yes" })}
-              />
-              <label htmlFor="yes">Yes</label>
-            </div>
-            <div style={{ marginLeft: "20px" }}>
-              <input
-                type="checkbox"
-                checked={field.value === "No"}
-                onChange={() => onChangeField({ value: "No" })}
-              />
-              <label htmlFor="no">No</label>
-            </div>
-          </div>
-        );
-      case "radio":
         return (
           <div>
             {options.map((option, index) => (
-              <div key={index}>
+              <div key={index} className="SquareCheckboxWrapper">
                 <input
                   type="checkbox"
                   value={option}
                   checked={radio.includes(option)}
+
                   onChange={() => handleRadio(option)}
+                  // className="SquareCheckboxInput"
                 />
                 <label>{option}</label>
                 <input

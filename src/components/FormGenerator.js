@@ -1,4 +1,5 @@
-import React, { useState} from "react";
+
+import React, { useState, useRef } from "react";
 import FormField from "./FormField";
 
 const FormGenerator = () => {
@@ -38,17 +39,12 @@ const FormGenerator = () => {
     { type: "text", label: "Add Text Input" },
     { type: "textarea", label: "Add Textarea" },
     { type: "dropdown", label: "Add Dropdown" },
-    { type: "checkbox", label: "Add Checkbox" },
     { type: "radio", label: "Add Radio Button" },
+    { type: "checkbox", label: "Add CheckBox" },
   ];
 
   const handleSubmit = () => {
-    const formData = formFields.reduce((data, field) => {
-      data[field.label] = field.type === "checkbox" ? field.value : field.value;
-      return data;
-    }, {});
-
-    const jsonString = JSON.stringify(formData, null, 2);
+    const jsonString = JSON.stringify(formConfig, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
@@ -64,20 +60,37 @@ const FormGenerator = () => {
   };
 
   const handleSaveConfig = () => {
-    setFormConfig({ fields: formFields });
-    console.log("Form configuration saved:", formConfig);
+    const savedConfig = { fields: formFields };
+    setFormConfig(savedConfig);
+  };
+
+  const fileInputRef = useRef(null);
+
+  const handleLoadButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleLoadConfig = (event) => {
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const loadedConfig = JSON.parse(e.target.result);
+          console.log(loadedConfig.fields);
+          setFormFields(loadedConfig.fields);
+        } catch (error) {
+          console.error("Error loading form configuration:", error);
+        }
+      };
+      reader.readAsText(file);
+    }
   };
 
   return (
-    <div className="formContainer">
-      {formFields.map((field) => (
-        <FormField
-          key={field.label}
-          field={field}
-          onRemoveField={removeField}
-          onChangeField={(value) => handleChange(field.label, value)}
-        />
-      ))}
+    <>
       <div className="buttonContainer">
         {buttonsConfig.map(({ type, label }) => (
           <button
@@ -90,16 +103,41 @@ const FormGenerator = () => {
           </button>
         ))}
       </div>
-      <br />
-      <br />
-      <button onClick={handleSaveConfig} className="saveConfigButton">
-        Save Form Config
-      </button>
-      <br />
-      <button type="button" className="submitButton" onClick={handleSubmit}>
-        Download JSON File
-      </button>
-    </div>
+      <div className="formContainer card">
+        {formFields.map((field) => (
+          <FormField
+            key={field.label}
+            field={field}
+            onRemoveField={removeField}
+            onChangeField={(value) => handleChange(field.label, value)}
+          />
+        ))}
+      </div>
+      <div className="buttonclass">
+        <button onClick={handleSaveConfig} className="buttons saveConfigButton">
+          Save Form Config
+        </button>
+        <input
+          type="file"
+          accept=".json"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleLoadConfig}
+        />
+        <button type="button" className="buttons submitButton" onClick={handleSubmit}>
+          Download JSON File
+        </button>
+        <button
+          type="button"
+          className="buttons LoadButton"
+          onClick={handleLoadButtonClick}
+        >
+          Load Form Config
+        </button>
+      </div>
+
+
+    </>
   );
 };
 
